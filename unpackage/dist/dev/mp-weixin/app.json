@@ -1,6 +1,9 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/login/login",
+    "pages/demo/demo",
+    "pages/index/index",
+    "pages/register/register"
   ],
   "subPackages": [],
   "window": {
@@ -9,6 +12,5 @@
     "navigationBarBackgroundColor": "#F8F8F8",
     "backgroundColor": "#F8F8F8"
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }
