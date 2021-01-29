@@ -145,21 +145,48 @@ __webpack_require__.r(__webpack_exports__);
 var _default =
 {
   data: function data() {
-    return {};
+    return {
+      registrationCode: "" };
+
   },
   methods: {
     register: function register() {
+      var that = this;
+      if (that.registrationCode == null || that.registrationCode.length === 0) {
+        uni.showToast({
+          icon: "none",
+          title: "注册邀请码不能为空" });
+
+        return;
+      }
+      if (!/^[0-9]{6}$/.test(that.registrationCode)) {
+        uni.showToast({
+          icon: "none",
+          title: "注册邀请码必须是6位数" });
+
+        return;
+      }
       uni.login({
         provider: "weixin",
         success: function success(resp) {
-          var code = resp.code;
+          console.log(resp.code);
+          var wxCode = resp.code;
           uni.getUserInfo({
             provider: "weixin",
             success: function success(resp) {
               var nickName = resp.userInfo.nickName;
               var avatarUrl = resp.userInfo.avatarUrl;
-              console.log(nickName);
-              console.log(avatarUrl);
+              var data = {
+                wxCode: wxCode,
+                avatarUrl: avatarUrl,
+                nickname: nickName,
+                registrationCode: that.registrationCode };
+
+              that.ajax(that.url.register, "POST", data, function (resp) {
+                var permissions = resp.data.permissions;
+                uni.setStorageSync("permissions", permissions);
+                // TODO: 跳转到index页面
+              });
             } });
 
         } });
