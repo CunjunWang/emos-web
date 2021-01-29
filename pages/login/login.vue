@@ -22,6 +22,27 @@ export default {
       uni.navigateTo({
         url: '../register/register'
       })
+    },
+    login: function () {
+      let that = this;
+      uni.login({
+        provider: "weixin",
+        success: function (resp) {
+          let wxCode = resp.code;
+          that.ajax(that.url.login, "POST", {wxCode}, function (resp) {
+            let permissions = resp.data.permissions;
+            uni.setStorageSync("permissions", permissions);
+            // TODO 跳转到index页面
+          })
+        },
+        fail: function (e) {
+          console.log(e);
+          uni.showToast({
+            icon: "none",
+            title: "登录异常"
+          })
+        }
+      })
     }
   }
 }

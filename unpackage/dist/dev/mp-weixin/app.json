@@ -7,10 +7,10 @@
   ],
   "subPackages": [],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "EMOS系统",
+    "navigationBarBackgroundColor": "#3474FF",
+    "backgroundColor": "#EEEEF4"
   },
   "usingComponents": {}
 }

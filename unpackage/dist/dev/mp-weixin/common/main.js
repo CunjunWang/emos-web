@@ -22,7 +22,8 @@ createApp(app).$mount();
 // 全局接口链接
 var baseUrl = "http://localhost:9030/emos-wx-api";
 _vue.default.prototype.url = {
-  register: baseUrl + "/user/register" };
+  register: baseUrl + "/user/register",
+  login: baseUrl + "/user/login" };
 
 
 // 全局ajax方法
