@@ -32,8 +32,11 @@ export default {
           that.ajax(that.url.login, "POST", {wxCode}, function (resp) {
             let permissions = resp.data.permissions;
             uni.setStorageSync("permissions", permissions);
-            // TODO 跳转到index页面
           })
+          console.log("success");
+          uni.switchTab({
+            url: '../index/index'
+          });
         },
         fail: function (e) {
           console.log(e);

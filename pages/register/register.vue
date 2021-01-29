@@ -53,7 +53,9 @@ export default {
               that.ajax(that.url.register, "POST", data, function (resp) {
                 let permissions = resp.data.permissions;
                 uni.setStorageSync("permissions", permissions);
-                // TODO: 跳转到index页面
+                uni.switchTab({
+                  url: '../index/index'
+                });
               })
             }
           })
