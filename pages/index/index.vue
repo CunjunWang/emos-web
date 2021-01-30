@@ -1,7 +1,6 @@
 <template>
   <view class="page">
-    <swiper circular="true" duration="1000" interval="8000"
-            class="swiper">
+    <swiper circular="true" duration="500" interval="5000" class="swiper">
       <swiper-item>
         <image mode="widthFix"
                src="https://nixie-emos-static-1304902070.cos.ap-shanghai.myqcloud.com/img/banner/swiper-1.jpg"></image>
@@ -32,7 +31,7 @@
       <view class="notification-content">
         你有{{ unread }}条未读消息
       </view>
-      <image src="../../static/icon-2" mode="widthFix"
+      <image src="../../static/icon-2.png" mode="widthFix"
              class="more-icon"></image>
     </view>
     <view class="nav-container">
