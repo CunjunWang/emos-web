@@ -1,0 +1,81 @@
+@import url("../../style.less");
+
+.page {
+  background-color: #EEEEF4;
+}
+
+.swiper {
+  height: 233px;
+
+  image {
+    width: 100%;
+  }
+}
+
+.notification-container {
+  background-color: #ffffff;
+  padding: 25rpx;
+  position: relative;
+  margin-bottom: 20rpx;
+
+  .notification-title {
+    font-size: 34rpx;
+    color: @background-color;
+    margin-bottom: 10rpx;
+
+    .notification-icon {
+      width: 38rpx;
+      margin-right: 5rpx;
+      vertical-align: -8rpx;
+    }
+  }
+
+  .notification-content {
+    font-size: 30rpx;
+    color: @font-color;
+
+    &:before {
+      display: inline-block;
+      content: "";
+      width: 12rpx;
+      height: 12rpx;
+      border-radius: 6rpx;
+      margin-left: 18rpx;
+      margin-right: 15rpx;
+      vertical-align: 3rpx;
+    }
+  }
+
+  .more-icon {
+    position: absolute;
+    right: 5rpx;
+    top: 50rpx;
+    width: 60rpx;
+  }
+}
+
+.nav-container {
+  background-color: #fff;
+  margin-bottom: 20rpx;
+  padding: 50rpx 40rpx;
+
+  .nav-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50rpx;
+
+    .nav-item {
+      text-align: center;
+
+      .icon {
+        width: 80rpx;
+      }
+
+      .name {
+        display: block;
+        font-size: 30rpx;
+        color: @font-color;
+      }
+    }
+  }
+}
