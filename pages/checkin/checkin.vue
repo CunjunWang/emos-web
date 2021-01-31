@@ -25,20 +25,31 @@
 </template>
 
 <script>
+import {secret} from "common/secret";
+import {constant} from "common/constant"
+
+let QQMapWx = require('../../lib/qqmap-wx-jssdk.min')
+let qqMapSdk;
+
 export default {
   data() {
     return {
       canCheckin: false,
       photoPath: "",
-      btnText: "拍照",
+      btnText: constant.BTN_TEXT_TAKE_PICTURE,
       showCamera: true,
       showImage: false
     }
   },
+  onLoad: function () {
+    qqMapSdk = new QQMapWx({
+      key: secret.QQ_MAP_SECRET_KEY
+    })
+  },
   methods: {
     clickBtn: function () {
       let that = this;
-      if (that.btnText === "拍照") {
+      if (that.btnText === constant.BTN_TEXT_TAKE_PICTURE) {
         // 拍照功能
         let ctx = uni.createCameraContext();
         ctx.takePhoto({
@@ -48,18 +59,49 @@ export default {
             that.photoPath = resp.tempImagePath;
             that.showCamera = false;
             that.showImage = true;
-            that.btnText = "签到";
+            that.btnText = constant.BTN_TEXT_CHECKIN;
           }
         })
       } else {
-        // TODO: 签到功能
+        // 签到功能
+        uni.showLoading({
+          title: "签到中, 请稍后..."
+        });
+        setTimeout(function () {
+          uni.hideLoading();
+        }, 30000)
+
+        uni.getLocation({
+          type: "wgs84",
+          success: function (resp) {
+            let lat = resp.latitude;
+            let lon = resp.longitude;
+            // console.log("lat: " + lat);
+            // console.log("lon: " + lon);
+            qqMapSdk.reverseGeocoder({
+              location: {
+                latitude: lat,
+                longitude: lon
+              },
+              success: function (resp) {
+                console.log(resp.result);
+                let address = resp.result.address;
+                let addressComponent = resp.result.address_component;
+                let nation = addressComponent.nation;
+                let province = addressComponent.province;
+                let city = addressComponent.city;
+                let district = addressComponent.district;
+              }
+            })
+          }
+        })
       }
     },
     afresh: function () {
       let that = this;
       that.showCamera = true;
       that.showImage = false;
-      that.btnText = "拍照";
+      that.btnText = constant.BTN_TEXT_TAKE_PICTURE;
     }
   },
 }
