@@ -48,11 +48,10 @@ export default {
   },
   methods: {
     clickBtn: function () {
+      // 拍照功能
       let that = this;
-      if (that.btnText === constant.BTN_TEXT_TAKE_PICTURE) {
-        // 拍照功能
-        let ctx = uni.createCameraContext();
-        ctx.takePhoto({
+      if (that.btnText === constant.BTN_TEXT_TAKE_PICTURE)
+        uni.createCameraContext().takePhoto({
           quality: 'high',
           success: function (resp) {
             console.log(resp.tempImagePath)
@@ -61,36 +60,95 @@ export default {
             that.showImage = true;
             that.btnText = constant.BTN_TEXT_CHECKIN;
           }
-        })
-      } else {
+        });
+      else {
         // 签到功能
         uni.showLoading({
           title: "签到中, 请稍后..."
         });
         setTimeout(function () {
           uni.hideLoading();
-        }, 30000)
+        }, 15000)
 
         uni.getLocation({
           type: "wgs84",
           success: function (resp) {
-            let lat = resp.latitude;
-            let lon = resp.longitude;
-            // console.log("lat: " + lat);
-            // console.log("lon: " + lon);
             qqMapSdk.reverseGeocoder({
               location: {
-                latitude: lat,
-                longitude: lon
+                latitude: resp.latitude,
+                longitude: resp.longitude
               },
               success: function (resp) {
-                console.log(resp.result);
                 let address = resp.result.address;
                 let addressComponent = resp.result.address_component;
-                let nation = addressComponent.nation;
+                let country = addressComponent.nation;
                 let province = addressComponent.province;
                 let city = addressComponent.city;
                 let district = addressComponent.district;
+
+                // 上传照片执行签到
+                uni.uploadFile({
+                  url: that.url.checkin,
+                  filePath: that.photoPath,
+                  name: "photo",
+                  header: {
+                    token: uni.getStorageSync("token")
+                  },
+                  formData: {
+                    address, country, province, city, district
+                  },
+                  success: function (resp) {
+                    console.log("签到resp: " + resp);
+                    if (resp.statusCode === 500 && resp.data === "不存在人脸模型") {
+                      uni.hideLoading();
+                      uni.showModal({
+                        title: "提示信息",
+                        content: "系统中不存在你的人脸模型, 是否使用当前照片建模?",
+                        success: function (res) {
+                          if (res.confirm) // 用户确认, 上传照片
+                            uni.uploadFile({
+                              url: that.url.createFaceModel,
+                              filePath: that.photoPath,
+                              name: "photo",
+                              header: {
+                                token: uni.getStorageSync("token")
+                              },
+                              success: function (resp) {
+                                if (resp.statusCode === 500)
+                                  uni.showToast({
+                                    title: resp.data,
+                                    icon: "none"
+                                  })
+                                else if (resp.statusCode === 200)
+                                  uni.showToast({
+                                    title: "人脸建模成功",
+                                    icon: "none"
+                                  })
+                              }
+                            });
+                        }
+                      })
+                    } else if (resp.statusCode === 200) {
+                      let data = JSON.parse(resp.data);
+                      let code = data.code;
+                      let msg = data.msg;
+                      if (code === 200) {
+                        uni.hideLoading();
+                        uni.showToast({
+                          title: "签到成功",
+                          complete: function() {
+                            // TODO: 跳转到签到统计页面
+                          }
+                        })
+                      }
+                    } else if (resp.statusCode === 500) {
+                      uni.showToast({
+                        title: resp.data,
+                        icon: "none"
+                      })
+                    }
+                  }
+                })
               }
             })
           }

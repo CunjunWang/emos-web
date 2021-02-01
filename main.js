@@ -14,7 +14,10 @@ app.$mount()
 let baseUrl = "http://localhost:9030/emos-wx-api"
 Vue.prototype.url = {
     register: baseUrl + "/user/register",
-    login: baseUrl + "/user/login"
+    login: baseUrl + "/user/login",
+    checkin: baseUrl + "/checkin/checkin",
+    createFaceModel: baseUrl + "/checkin/faceModel",
+    ableOrNot: baseUrl + "/checkin/ableOrNot",
 }
 
 // 全局ajax方法
