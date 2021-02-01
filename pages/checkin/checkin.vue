@@ -64,7 +64,7 @@ export default {
       else {
         // 签到功能
         uni.showLoading({
-          title: "签到中, 请稍后..."
+          title: constant.CHECKIN_MSG_CHECKING_IN
         });
         setTimeout(function () {
           uni.hideLoading();
@@ -92,18 +92,18 @@ export default {
                   filePath: that.photoPath,
                   name: "photo",
                   header: {
-                    token: uni.getStorageSync("token")
+                    token: uni.getStorageSync(constant.STORAGE_KEY_TOKEN)
                   },
                   formData: {
                     address, country, province, city, district
                   },
                   success: function (resp) {
-                    console.log("签到resp: " + resp);
-                    if (resp.statusCode === 500 && resp.data === "不存在人脸模型") {
+                    let data = JSON.parse(resp.data);
+                    if (resp.statusCode === 500 && data.msg === constant.CHECKIN_MSG_NO_MODEL) {
                       uni.hideLoading();
                       uni.showModal({
                         title: "提示信息",
-                        content: "系统中不存在你的人脸模型, 是否使用当前照片建模?",
+                        content: constant.CHECKIN_MSG_CREATE_MODEL,
                         success: function (res) {
                           if (res.confirm) // 用户确认, 上传照片
                             uni.uploadFile({
@@ -111,7 +111,7 @@ export default {
                               filePath: that.photoPath,
                               name: "photo",
                               header: {
-                                token: uni.getStorageSync("token")
+                                token: uni.getStorageSync(constant.STORAGE_KEY_TOKEN)
                               },
                               success: function (resp) {
                                 if (resp.statusCode === 500)
@@ -121,7 +121,7 @@ export default {
                                   })
                                 else if (resp.statusCode === 200)
                                   uni.showToast({
-                                    title: "人脸建模成功",
+                                    title: constant.CHECKIN_MSG_SUCCESS_CREATE_MODEL,
                                     icon: "none"
                                   })
                               }
@@ -135,7 +135,7 @@ export default {
                       if (code === 200) {
                         uni.hideLoading();
                         uni.showToast({
-                          title: "签到成功",
+                          title: constant.CHECKIN_MSG_SUCCESS,
                           complete: function() {
                             // TODO: 跳转到签到统计页面
                           }
