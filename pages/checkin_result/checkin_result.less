@@ -47,7 +47,7 @@
       .dept {
         display: block;
         font-size: 28rpx;
-        color: #999999;
+        color: #999;
       }
     }
   }
@@ -55,5 +55,87 @@
   .date {
     font-size: 38rpx;
     color: @background-color;
+  }
+}
+
+.result-container {
+  display: flex;
+  background-color: #fff;
+  padding: 35rpx;
+  margin-bottom: 20rpx;
+
+  .left {
+    position: relative; // 绝对定位的父控件必须要相对行为
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 330rpx;
+    margin-right: 30rpx;
+
+    .icon-timer {
+      width: 40rpx;
+      height: 40rpx;
+      &:first-child {
+        margin-top: 5rpx;
+      }
+    }
+
+    .line {
+      position: absolute;
+      height: 225rpx;
+      width: 0;
+      border-left: solid #e5e5e5 2rpx;
+      left: 20rpx;
+      top: 55rpx;
+    }
+  }
+
+  .right {
+    .row {
+      display: flex;
+      margin-bottom: 25rpx;
+
+      .start, .end {
+        font-size: 32rpx;
+        color: @background-color;
+      }
+
+      .checkin-time {
+        font-size: 38rpx;
+        font-weight: bold;
+        color: @font-color;
+        display: block;
+      }
+
+      .checkin-result {
+        display: block;
+        background-color: #fff;
+        font-size: 26rpx;
+        height: 42rpx;
+        line-height: 42rpx;
+        padding: 0 15rpx;
+        border-radius: 8rpx;
+        margin-left: 20rpx;
+        color: #fff;
+      }
+
+      .other {
+        margin-top: 7rpx;
+        margin-left: 10rpx;
+      }
+
+      .icon-small {
+        width: 38rpx;
+        height: 38rpx;
+        margin-right: 10rpx;
+        margin-top: 7rpx;
+      }
+
+      .desc {
+        color: #999;
+        font-size: 32rpx;
+      }
+    }
+
   }
 }
