@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       username: "王以太",
-      avatarUrl: "",
+      avatarUrl: "https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83er164JNVcRibNUWjC6MIZcIvDk9ccxVUsckybHj9tCBaZXhmI5PPGnSlZvcmdKV5d5QEkyUQcXArkw/132",
       deptName: "新零售事业群",
       address: "上海市虹口区",
       status: "正常",
@@ -91,6 +91,24 @@ export default {
         {type: "节假日", day: "周日", status: ""}
       ]
     }
+  },
+  onShow: function () {
+    let that = this;
+    that.ajax(this.url.todayCheckin, 'GET', null, function (resp) {
+      let result = resp.data.result;
+      that.username = result.name;
+      that.avatarUrl = result.photo;
+      that.deptName = result.deptName;
+      that.address = result.address;
+      that.status = result.status;
+      that.risk = result.risk;
+      that.checkinTime = result.checkinTime;
+      that.date = result.date;
+      that.attendanceTime = result.attendanceTime;
+      that.closingTime = result.closingTime;
+      that.checkinDays = result.checkinDays;
+      that.weeklyCheckin = result.weeklyCheckin;
+    });
   },
   methods: {}
 }

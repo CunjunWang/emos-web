@@ -18,6 +18,7 @@ Vue.prototype.url = {
     checkin: baseUrl + "/checkin/checkin",
     createFaceModel: baseUrl + "/checkin/faceModel",
     ableOrNot: baseUrl + "/checkin/ableOrNot",
+    todayCheckin: baseUrl + '/checkin/today'
 }
 
 // 全局ajax方法

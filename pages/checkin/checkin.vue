@@ -152,7 +152,10 @@ export default {
                         uni.showToast({
                           title: constant.CHECKIN_MSG_SUCCESS,
                           complete: function () {
-                            // TODO: 跳转到签到统计页面
+                            // 跳转到签到统计页面
+                            uni.navigateTo({
+                              url: '../checkin_result/checkin_result'
+                            })
                           }
                         })
                       }
