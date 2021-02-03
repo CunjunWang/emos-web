@@ -42,6 +42,27 @@
         </view>
       </view>
     </view>
+    <view class="checkin-report">
+      <image src="../../static/big-icon-1.png" mode="widthFix" class="icon-big"></image>
+      <view class="report-title">
+        <text class="days">{{ checkinDays }}</text>
+        <text class="unit">天</text>
+      </view>
+      <view class="sub-title">
+        <text>累计签到</text>
+        <view class="line"></view>
+      </view>
+      <view class="calendar-container">
+        <view class="calendar" v-for="d in weeklyCheckin" :key="d">
+          <image src="../../static/icon-9.png" mode="widthFix" class="calendar-icon" v-if="d.type === '工作日'"></image>
+          <image src="../../static/icon-10.png" mode="widthFix" class="calendar-icon" v-if="d.type === '节假日'"></image>
+          <text class="day">{{ d.day }}</text>
+          <text class="result green" v-if="d.status === '正常'">{{ d.status }}</text>
+          <text class="result yellow" v-if="d.status === '迟到'">{{ d.status }}</text>
+          <text class="result red" v-if="d.status === '缺勤'">{{ d.status }}</text>
+        </view>
+      </view>
+    </view>
   </view>
 </template>
 
@@ -66,8 +87,8 @@ export default {
         {type: "工作日", day: "周三", status: "正常"},
         {type: "工作日", day: "周四", status: "正常"},
         {type: "工作日", day: "周五", status: "正常"},
-        {type: "休息日", day: "周六", status: ""},
-        {type: "休息日", day: "周日", status: ""}
+        {type: "节假日", day: "周六", status: ""},
+        {type: "节假日", day: "周日", status: ""}
       ]
     }
   },

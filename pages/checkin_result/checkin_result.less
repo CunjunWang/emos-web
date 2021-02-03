@@ -136,6 +136,92 @@
         font-size: 32rpx;
       }
     }
+  }
+}
 
+.checkin-report {
+  background-color: #fff;
+  padding: 35rpx;
+
+  .icon-big {
+    display: block;
+    width: 250rpx;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20rpx;
+  }
+
+  .report-title {
+    display: flex;
+    justify-content: center;
+    margin-top: 20rpx;
+
+    .days {
+      font-size: 60rpx;
+      color: @font-color;
+    }
+
+    .unit {
+      margin-left: 10rpx;
+      margin-top: 33rpx;
+    }
+  }
+
+  .sub-title {
+    font-size: 34rpx;
+    color: @font-color;
+    text-align: center;
+    margin-top: 10rpx;
+    position: relative;
+
+    text {
+      background-color: #fff;
+      position: relative;
+      z-index: 999;
+      padding: 0 30rpx;
+    }
+
+    .line {
+      height: 0;
+      width: 100%;
+      border-bottom: solid #e5e5e5 2rpx;
+      position: absolute;
+      top: 25rpx;
+    }
+  }
+
+  .calendar-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30rpx;
+
+    .calendar {
+      text-align: center;
+      flex-grow: 0;
+      flex-shrink: 0;
+
+      .calendar-icon {
+        width: 70rpx;
+        display: block;
+        margin-bottom: 5rpx;
+      }
+
+      .day {
+        font-size: 32rpx;
+        color: @font-color;
+        display: block;
+      }
+
+      .result {
+        display: block;
+        font-size: 26rpx;
+        color: #fff;
+        height: 42rpx;
+        line-height: 42rpx;
+        padding: 0 5rpx;
+        border-radius: 8rpx;
+        margin-top: 10rpx;
+      }
+    }
   }
 }
