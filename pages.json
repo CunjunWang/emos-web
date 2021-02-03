@@ -63,7 +63,16 @@
 			}
 
 		}
-	],
+	    ,{
+            "path" : "pages/checkin_result/checkin_result",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"permission": {
 	    "scope.userLocation": {
 	      "desc": "你的位置信息将用于小程序签到"

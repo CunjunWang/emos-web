@@ -1,0 +1,59 @@
+@import url("../../style.less");
+
+.page {
+  background-color: #eeeef4;
+}
+
+.yellow {
+  background-color: #f0b52f !important;
+}
+
+.red {
+  background-color: #f0532f !important;
+}
+
+.green {
+  background-color: #52a929 !important;
+}
+
+.summary-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #fff;
+  padding: 35rpx;
+  margin-bottom: 20rpx;
+
+  .user-info {
+    display: flex;
+
+    .photo {
+      width: 100rpx;
+      height: 100rpx;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      margin-left: 25rpx;
+
+      .username {
+        display: block;
+        font-size: 34rpx;
+        font-weight: bold;
+        color: @font-color;
+      }
+
+      .dept {
+        display: block;
+        font-size: 28rpx;
+        color: #999999;
+      }
+    }
+  }
+
+  .date {
+    font-size: 38rpx;
+    color: @background-color;
+  }
+}

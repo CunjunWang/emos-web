@@ -12,10 +12,10 @@
            v-if="showImage">
     </image>
     <view class="operate-container">
-      <button type="primary" class="btn" @tap="clickBtn" :disabled="canCheckin">
+      <button type="primary" class="btn" @tap="clickBtn" :disabled="!canCheckin">
         {{ btnText }}
       </button>
-      <button type="warn" class="btn" @tap="afresh" :disabled="canCheckin">重拍</button>
+      <button type="warn" class="btn" @tap="afresh" :disabled="!canCheckin">重拍</button>
     </view>
     <view class="notice-container">
       <text class="notice">注意事项</text>
@@ -34,7 +34,7 @@ let qqMapSdk;
 export default {
   data() {
     return {
-      canCheckin: false,
+      canCheckin: true,
       photoPath: "",
       btnText: constant.BTN_TEXT_TAKE_PICTURE,
       showCamera: true,
@@ -45,6 +45,21 @@ export default {
     qqMapSdk = new QQMapWx({
       key: secret.QQ_MAP_SECRET_KEY
     })
+  },
+  onShow: function () {
+    let that = this;
+    that.ajax(that.url.ableOrNot, "GET", null, function (resp) {
+      let msg = resp.data.msg;
+      if (msg !== "可以考勤") {
+        that.canCheckin = false;
+        setTimeout(function () {
+          uni.showToast({
+            title: msg,
+            icon: "none"
+          })
+        }, 1000)
+      }
+    });
   },
   methods: {
     clickBtn: function () {
@@ -71,7 +86,7 @@ export default {
         }, 15000)
 
         uni.getLocation({
-          type: "wgs84",
+          type: "gps",
           success: function (resp) {
             qqMapSdk.reverseGeocoder({
               location: {
@@ -136,7 +151,7 @@ export default {
                         uni.hideLoading();
                         uni.showToast({
                           title: constant.CHECKIN_MSG_SUCCESS,
-                          complete: function() {
+                          complete: function () {
                             // TODO: 跳转到签到统计页面
                           }
                         })
