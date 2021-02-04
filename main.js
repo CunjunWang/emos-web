@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import App from './App'
+import {constant} from "./common/constant";
 
 Vue.config.productionTip = false
 
@@ -27,7 +28,7 @@ Vue.prototype.ajax = function (url, method, data, fun) {
         "url": url,
         "method": method,
         "header": {
-            token: uni.getStorageSync("token")
+            token: uni.getStorageSync(constant.STORAGE_KEY_TOKEN)
         },
         "data": data,
         success: function (resp) {
@@ -37,10 +38,10 @@ Vue.prototype.ajax = function (url, method, data, fun) {
                 });
             } else if (resp.statusCode === 200 && resp.data.code === 200) {
                 let data = resp.data;
-                if (data.hasOwnProperty("token")) {
+                if (data.hasOwnProperty(constant.STORAGE_KEY_TOKEN)) {
                     console.log(resp.data);
                     let token = data.token;
-                    uni.setStorageSync("token", token);
+                    uni.setStorageSync(constant.STORAGE_KEY_TOKEN, token);
                 }
                 fun(resp);
             } else {
@@ -51,4 +52,13 @@ Vue.prototype.ajax = function (url, method, data, fun) {
             }
         }
     });
+}
+
+// 权限校验
+Vue.prototype.checkPermission = function (permissions) {
+    let userPermissions = uni.getStorageSync(constant.STORAGE_KEY_PERMISSIONS);
+    for (let p in permissions)
+        if (userPermissions.indexOf(p) !== -1)
+            return true;
+    return false;
 }

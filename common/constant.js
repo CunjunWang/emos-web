@@ -3,6 +3,7 @@
 export const constant = {
     // 本地存储键
     STORAGE_KEY_TOKEN: "token",
+    STORAGE_KEY_PERMISSIONS: "permissions",
 
     // 按钮文字
     BTN_TEXT_TAKE_PICTURE: "拍照",
@@ -14,5 +15,11 @@ export const constant = {
     CHECKIN_MSG_CREATE_MODEL: "系统中不存在你的人脸模型, 是否使用当前照片建模?",
     CHECKIN_MSG_SUCCESS_CREATE_MODEL: "人脸建模成功",
     CHECKIN_MSG_SUCCESS: "签到成功",
-    CHECKIN_OK_TO_CHECKIN: "可以考勤"
+    CHECKIN_OK_TO_CHECKIN: "可以考勤",
+
+    API_PROVIDER_WECHAT: "weixin",
+
+    HTTP_METHOD_GET: "GET",
+    HTTP_METHOD_POST: "POST",
 }
+

@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import {constant} from "common/constant";
+
 export default {
   data() {
     return {
@@ -35,24 +37,21 @@ export default {
         return;
       }
       uni.login({
-        provider: "weixin",
+        provider: constant.API_PROVIDER_WECHAT,
         success: function (resp) {
-          console.log(resp.code);
           let wxCode = resp.code;
           uni.getUserInfo({
-            provider: "weixin",
+            provider: constant.API_PROVIDER_WECHAT,
             success: function (resp) {
-              let nickName = resp.userInfo.nickName;
+              let nickname = resp.userInfo.nickName;
               let avatarUrl = resp.userInfo.avatarUrl;
               let data = {
-                wxCode,
-                avatarUrl,
-                nickname: nickName,
+                wxCode, avatarUrl, nickname,
                 registrationCode: that.registrationCode
               }
-              that.ajax(that.url.register, "POST", data, function (resp) {
+              that.ajax(that.url.register, constant.HTTP_METHOD_POST, data, function (resp) {
                 let permissions = resp.data.permissions;
-                uni.setStorageSync("permissions", permissions);
+                uni.setStorageSync(constant.STORAGE_KEY_PERMISSIONS, permissions);
                 uni.switchTab({
                   url: '../index/index'
                 });

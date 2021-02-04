@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import {constant} from 'common/constant'
 export default {
   data() {
     return {}
@@ -26,14 +27,13 @@ export default {
     login: function () {
       let that = this;
       uni.login({
-        provider: "weixin",
+        provider: constant.API_PROVIDER_WECHAT,
         success: function (resp) {
           let wxCode = resp.code;
-          that.ajax(that.url.login, "POST", {wxCode}, function (resp) {
+          that.ajax(that.url.login, constant.HTTP_METHOD_POST, {wxCode}, function (resp) {
             let permissions = resp.data.permissions;
-            uni.setStorageSync("permissions", permissions);
+            uni.setStorageSync(constant.STORAGE_KEY_PERMISSIONS, permissions);
           })
-          console.log("success");
           uni.switchTab({
             url: '../index/index'
           });
