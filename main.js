@@ -22,6 +22,15 @@ Vue.prototype.url = {
     todayCheckin: baseUrl + '/checkin/today'
 }
 
+// 权限校验
+Vue.prototype.hasPermission = function (requiredPermissions) {
+    let userPermissions = uni.getStorageSync(constant.STORAGE_KEY_PERMISSIONS);
+    for (let p of userPermissions)
+        if (requiredPermissions.indexOf(p) !== -1)
+            return true;
+    return false;
+}
+
 // 全局ajax方法
 Vue.prototype.ajax = function (url, method, data, fun) {
     uni.request({
@@ -52,13 +61,4 @@ Vue.prototype.ajax = function (url, method, data, fun) {
             }
         }
     });
-}
-
-// 权限校验
-Vue.prototype.checkPermission = function (permissions) {
-    let userPermissions = uni.getStorageSync(constant.STORAGE_KEY_PERMISSIONS);
-    for (let p in permissions)
-        if (userPermissions.indexOf(p) !== -1)
-            return true;
-    return false;
 }
