@@ -31,7 +31,7 @@
     <uni-list>
       <uni-list-item title="员工管理" v-show="hasPermission(['ROOT', 'EMPLOYEE:SELECT'])" link to=""></uni-list-item>
       <uni-list-item title="部门管理" v-show="hasPermission(['ROOT', 'DEPT:SELECT'])" link to=""></uni-list-item>
-      <uni-list-item title="权限管理" v-show="hasPermission(['ROOT', 'ROLE:SELECT'])" link  to=""></uni-list-item>
+      <uni-list-item title="权限管理" v-show="hasPermission(['ROOT', 'ROLE:SELECT'])" link to=""></uni-list-item>
     </uni-list>
   </view>
 </template>
@@ -39,6 +39,8 @@
 <script>
 import uniList from '@/components/uni-list/uni-list.vue';
 import uniListItem from '@/components/uni-list-item/uni-list-item.vue';
+import {constant} from "common/constant";
+
 export default {
   components: {
     uniList,
@@ -50,6 +52,15 @@ export default {
       deptName: "",
       photo: ""
     }
+  },
+  onShow: function () {
+    let that = this;
+    that.ajax(that.url.userSummary, constant.HTTP_METHOD_GET, null, function (resp) {
+      let result = resp.data.result;
+      that.name = result.name;
+      that.deptName = result.deptName;
+      that.photo = result.photo;
+    });
   },
   methods: {}
 }

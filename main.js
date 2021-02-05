@@ -16,10 +16,11 @@ let baseUrl = "http://localhost:9030/emos-wx-api"
 Vue.prototype.url = {
     register: baseUrl + "/user/register",
     login: baseUrl + "/user/login",
+    userSummary: baseUrl + '/user/summary',
     checkin: baseUrl + "/checkin/checkin",
     createFaceModel: baseUrl + "/checkin/faceModel",
     ableOrNot: baseUrl + "/checkin/ableOrNot",
-    todayCheckin: baseUrl + '/checkin/today'
+    todayCheckin: baseUrl + '/checkin/today',
 }
 
 // 权限校验

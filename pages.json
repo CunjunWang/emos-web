@@ -24,28 +24,28 @@
 		{
 			"path": "pages/meetings/meetings",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "在线会议",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/documents/documents",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "在线文档",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/contacts/contacts",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "通讯录",
 				"enablePullDownRefresh": false
 			}
 		},
 		{
 			"path": "pages/my/my",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "我的信息",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -58,7 +58,7 @@
 		}, {
 			"path": "pages/checkin/checkin",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "在线签到",
 				"enablePullDownRefresh": false
 			}
 
@@ -67,7 +67,7 @@
             "path" : "pages/checkin_result/checkin_result",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "签到结果",
                 "enablePullDownRefresh": false
             }
             
@@ -76,7 +76,7 @@
             "path" : "pages/my_checkin/my_checkin",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "",
+                "navigationBarTitleText": "我的考勤",
                 "enablePullDownRefresh": false
             }
             
