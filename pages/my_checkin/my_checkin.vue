@@ -75,9 +75,9 @@ export default {
               color
             })
           }
-        that.sumOnTime = res.data.sumOnTime;
-        that.sumLate = res.data.sumLate;
-        that.sumAbsence = res.data.sumAbsence;
+        that.sumOnTime = res.data.counts.sumOnTime;
+        that.sumLate = res.data.counts.sumLate;
+        that.sumAbsence = res.data.counts.sumAbsence;
       })
     },
     changeMonth: function (e) {

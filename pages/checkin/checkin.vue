@@ -46,21 +46,21 @@ export default {
       key: secret.QQ_MAP_SECRET_KEY
     })
   },
-  // onShow: function () {
-  //   let that = this;
-  //   that.ajax(that.url.ableOrNot, "GET", null, function (resp) {
-  //     let msg = resp.data.msg;
-  //     if (msg !== constant.CHECKIN_OK_TO_CHECKIN) {
-  //       that.canCheckin = false;
-  //       setTimeout(function () {
-  //         uni.showToast({
-  //           title: msg,
-  //           icon: "none"
-  //         })
-  //       }, 1000)
-  //     }
-  //   });
-  // },
+  onShow: function () {
+    let that = this;
+    that.ajax(that.url.ableOrNot, "GET", null, function (resp) {
+      let msg = resp.data.msg;
+      if (msg !== constant.CHECKIN_OK_TO_CHECKIN) {
+        that.canCheckin = false;
+        setTimeout(function () {
+          uni.showToast({
+            title: msg,
+            icon: "none"
+          })
+        }, 1000)
+      }
+    });
+  },
   methods: {
     clickBtn: function () {
       // 拍照功能
