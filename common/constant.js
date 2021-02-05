@@ -16,10 +16,15 @@ export const constant = {
     CHECKIN_MSG_SUCCESS_CREATE_MODEL: "人脸建模成功",
     CHECKIN_MSG_SUCCESS: "签到成功",
     CHECKIN_OK_TO_CHECKIN: "可以考勤",
+    CHECKIN_STATUS_OK: "正常",
+    CHECKIN_STATUS_LATE: "迟到",
+    CHECKIN_STATUS_ABSENCE: "缺勤",
 
     API_PROVIDER_WECHAT: "weixin",
 
     HTTP_METHOD_GET: "GET",
     HTTP_METHOD_POST: "POST",
+
+
 }
 

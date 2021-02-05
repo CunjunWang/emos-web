@@ -21,6 +21,7 @@ Vue.prototype.url = {
     createFaceModel: baseUrl + "/checkin/faceModel",
     ableOrNot: baseUrl + "/checkin/ableOrNot",
     todayCheckin: baseUrl + '/checkin/today',
+    monthlyCheckin: baseUrl + '/checkin/record/searchMonthly'
 }
 
 // 权限校验
@@ -54,11 +55,16 @@ Vue.prototype.ajax = function (url, method, data, fun) {
                     uni.setStorageSync(constant.STORAGE_KEY_TOKEN, token);
                 }
                 fun(resp);
+            } else if (resp.statusCode === 500) {
+                uni.showToast({
+                    icon: "none",
+                    title: resp.data.msg
+                });
             } else {
                 uni.showToast({
                     icon: "none",
-                    title: resp.data
-                });
+                    title: "后端服务未知异常"
+                })
             }
         }
     });
